@@ -1,0 +1,26 @@
+package pro.sky.myawesomepastebin.scheduler;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+import pro.sky.myawesomepastebin.repository.PasteRepository;
+
+import javax.transaction.Transactional;
+import java.time.Instant;
+import java.util.concurrent.TimeUnit;
+@Slf4j
+@Component
+public class Scheduler {
+    private final PasteRepository pasteRepository;
+
+    public Scheduler(PasteRepository pasteRepository) {
+        this.pasteRepository = pasteRepository;
+    }
+
+    @Scheduled(fixedRateString = "${timer.rate-minutes}", timeUnit = TimeUnit.MINUTES)
+    @Transactional
+    public void clearTokens() {
+        log.info("Scheduler is work");
+        pasteRepository.deleteAllByExpiredTimeIsBefore(Instant.now());
+    }
+}
