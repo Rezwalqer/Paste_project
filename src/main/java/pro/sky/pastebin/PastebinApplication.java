@@ -1,13 +1,13 @@
-package pro.sky.myawesomepastebin;
+package pro.sky.pastebin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MyAwesomePastebinApplication {
+public class PastebinApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MyAwesomePastebinApplication.class, args);
+        SpringApplication.run(PastebinApplication.class, args);
     }
 
 }
